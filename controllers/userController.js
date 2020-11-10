@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const axios = require('axios')
-const Store = mongoose.model('Store')
 const User = mongoose.model('User')
 const promisify = require('es6-promisify')
 
@@ -50,35 +49,8 @@ exports.updateAccountPassword = async (req, res) => {
 // }
 
 exports.registerForm = async (req, res) => {
-  // 1. req.params.license isn't connected to a account already
-  const user = await User.findOne({ license: req.params.license })
-  if (user) {
-    req.flash('warning', `That license is already connected to an account. Please login.`)
-    res.redirect('/login')
-    return
-  }
-
-  // 2. req.params.license exists in gumroad
-  try {
-    const result = await axios.post('https://api.gumroad.com/v2/licenses/verify', {
-      product_permalink: 'GVaFo',
-      license_key: req.params.license,
-      increment_uses_count: 'false',
-    })
-    if (!result.data.success) {
-      req.flash('warning', `License key does not exist.`)
-      res.redirect('/')
-      return
-    }
-  } catch (err) {
-    req.flash('warning', `License key does not exist.`)
-    res.redirect('/')
-    return
-  }
-
   res.render('pages/register', {
-    title: 'Register',
-    license: req.params.license,
+    title: 'Register'
   })
 }
 
