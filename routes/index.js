@@ -12,7 +12,7 @@ router.get('/', homeController.homePage)
 router.get('/account', authController.isLoggedIn, userController.account)
 router.get('/login', userController.loginForm)
 router.get('/register', userController.registerForm)
-router.post('/register/:license', 
+router.post('/register', 
   userController.validateRegister, 
   userController.register,
   authController.login

@@ -34,20 +34,6 @@ exports.updateAccountPassword = async (req, res) => {
   res.redirect('/account')
 }
 
-// exports.verifyLicense = async (req, res) => {
-//   try {
-//     const result = await axios.post('https://api.gumroad.com/v2/licenses/verify', {
-//       product_permalink: 'GVaFo',
-//       license_key: req.params.license,
-//       increment_uses_count: 'false',
-//     })
-//     console.log(result.data)
-//     res.json(result.data)
-//   } catch (err) {
-//     res.send('Could not verify license: ' + err)
-//   }
-// }
-
 exports.registerForm = async (req, res) => {
   res.render('pages/register', {
     title: 'Register'
@@ -56,8 +42,7 @@ exports.registerForm = async (req, res) => {
 
 exports.register = async (req, res, next) => {
   const user = new User({
-    email: req.body.email,
-    license: req.params.license,
+    email: req.body.email
   })
   const register = promisify(User.register, User)
   await register(user, req.body.password)
