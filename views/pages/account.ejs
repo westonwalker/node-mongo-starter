@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+    <main>
+        <div class="lg:relative">
+            <div class="mx-auto max-w-6xl w-full py-8 lg:py-16 text-left px-10 sm:px-16">
+                <%- include('../partials/flash'); %>
+                <div class="mx-auto flex flex-wrap">
+                    <div class="w-full flex flex-wrap">
+                        <h2
+                            class="w-full text-2xl mb-6 leading-10 font-extrabold text-gray-700 sm:text-2xl sm:leading-none md:text-3xl lg:text-3xl xl:text-3xl">
+                            Account Details
+                        </h2> 
+                        <form class="bg-white pt-6 pb-8 mb-4 w-full border-t border-gray-40" method="POST" action="/account-email">
+                          <div class="mb-4">
+                            <label class="max-w-xs block text-gray-700 text-sm font-bold mb-2" for="email">
+                              Email
+                            </label>
+                            <input value="<%= user.email %>" class="max-w-xs shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="email">
+                          </div>
+                          <div class="flex items-center justify-between">
+                            <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                              Update Email
+                            </button>  
+                          </div>
+                        </form>  
+                        <form class="bg-white pt-6 pb-8 mb-4 w-full border-t border-gray-400" method="POST" action="/account-password">
+                          <div class="mb-4 max-w-xs">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                              Password
+                            </label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Current password">
+                          </div>
+                          <div class="mb-6 max-w-xs"> 
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="New password">
+                          </div>
+                          <div class="flex items-center justify-between">
+                            <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                              Update Password
+                            </button>  
+                          </div>
+                        </form> 
+                        <div class="border-t border-gray-400 w-full pt-6">
+                          <h3
+                              class="w-full mb-3 text-2xl leading-10 font-extrabold text-gray-700 sm:text-2xl sm:leading-none md:text-3xl lg:text-3xl xl:text-3xl">
+                              Tailwind License
+                          </h3>
+                          <% if (user && user.license) { %>
+                          <button class="inline-block bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-2">
+                            Active
+                          </button>
+                          <p class="inline-block">
+                            <%= user.license %>
+                          </p>
+                          <% } else { %>
+                          <a href="/pricing" class="inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full mr-2">
+                            Buy Now
+                          </a>
+                          <p class="inline-block">
+                            No license is currently tied to your account.
+                          </p> 
+                          <% } %> 
+                        </div>
+                    </div> 
+                </div> 
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+</body>
+
+</html>

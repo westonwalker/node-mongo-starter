@@ -1,0 +1,41 @@
+
+<div class="relative py-2">
+  <div class="mx-auto auto max-w-6xl w-full px-10 sm:px-16">
+    <nav class="relative flex flex-wrap flex-row-reverse items-center">
+      <div class="flex w-1/2 space-x-10 justify-end items-center">
+      <% if (user && user.license) {
+      %>
+        <a href="/account" class="font-medium text-gray-700 hover:text-gray-800 transition duration-150 ease-in-out">Account</a>
+        <a href="/logout" class="font-medium text-gray-700 hover:text-gray-800 transition duration-150 ease-in-out">Log
+          Out</a>
+      <%
+      } else if (user && !user.license) {
+      %>
+        <a href="/account" class="font-medium text-gray-700 hover:text-gray-800 transition duration-150 ease-in-out">Account</a>
+        <a href="/logout" class="font-medium text-gray-700 hover:text-gray-800 transition duration-150 ease-in-out">Log
+          Out</a>
+        <a href="/pricing"
+          class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 border border-red-500 hover:border-transparent rounded">
+          Buy Now
+        </a>
+      <%
+      } else {
+      %>
+        <a href="/login" class="font-medium text-gray-700 hover:text-gray-800 transition duration-150 ease-in-out">Log
+          In</a>
+        <a href="/pricing"
+          class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 border border-red-500 hover:border-transparent rounded">
+          Buy Now
+        </a>
+        <%
+        }
+        %>
+      </div>
+      <div class="flex w-1/2 justify-start items-center">
+        <a href="/" class="text-3xl tracking-wide font-extrabold text-red-500 py-2 sm:py-4 inline">
+          <img class="h-10 w-10 inline" src="https://cdn.glitch.com/cfef91a7-79fa-49be-8dcf-f9545f723e28%2Ftw-logo.png?v=1603940586564" /> Tailwind<span class="font-light">Sites</span>
+        </a> 
+      </div>
+    </nav>
+  </div>
+</div> 

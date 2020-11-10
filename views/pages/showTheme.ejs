@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head'); %>
+  <link rel="stylesheet" href="/prism.css">
+    <style>
+      .desktop {
+        height: calc(100% - 64px);
+        width: 100%;
+        left: 50%; top: 50%; transform: translate(-50%, calc(-50% + 31.5px));
+        transition: all 0.7s ease-in;
+      }
+      .tablet {
+        width: 1024px; 
+        height: 765px;
+        border: 20px solid black;
+        border-radius: 20px;
+        left: 50%; top: 50%; transform: translate(-50%, calc(-50% + 31.5px));
+        transition: all 0.7s ease-in;
+      }
+      .mobile {
+        width: 375px; 
+        height: 636px;
+        border: 20px solid black;
+        border-radius: 15px;
+        left: 50%; top: 50%; transform: translate(-50%, calc(-50% + 31.5px));
+        transition: all 0.7s ease-in;
+      }
+      .morph-device {
+        background-color: #CCD5E0;
+      }
+      pre[class*="language-"] {
+        margin: 0;
+      }
+    </style>
+</head>
+
+<body>
+    <header>
+      <div class="relative py-2 bg-blue-900">
+        <div class="mx-auto w-full px-6" style="height: 48px;">
+          <nav class="relative flex flex-wrap flex-row-reverse items-center">
+            <div class="flex w-3/4 sm:w-1/2 space-x-10 justify-end items-center">
+              <div class="hidden lg:flex items-end py-2">
+                <a id="desktop" class="text-xl tracking-wide font-light text-white sm:leading-none px-2 cursor-pointer device">
+                  <svg class="h-auto w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </a> 
+                <a id="tablet" class="text-xl tracking-wide font-light text-gray-500 sm:leading-none px-2 cursor-pointer device">
+                  <svg class="h-auto w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                </a> 
+                <a id="mobile" class="text-xl tracking-wide font-light text-gray-500 sm:leading-none px-2 cursor-pointer device">
+                  <svg class="h-auto w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                </a> 
+              </div> 
+              <% if (user && user.license) {
+              %>
+              <div class="flex"> 
+                  <a id="preview" href="#"
+                    class="bg-transparent bg-red-500 hover:bg-red-500 text-white font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded mr-2">
+                    Preview
+                  </a>
+                  <a id="code" href="#"
+                    class="bg-transparent hover:bg-red-500 text-white font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
+                    Code
+                  </a> 
+              </div>
+              <%
+              } else {
+              %>
+                <% if (!user) { %>
+                <a href="/login" class="font-medium text-white hover:text-gray-300 transition duration-150 ease-in-out">Log
+                  In</a> 
+                <% } %>
+                <a href="/pricing"
+                  class="bg-transparent bg-red-500 text-white font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
+                  Buy Now
+                </a>
+                <%
+                }
+                %>
+            </div>
+            <div class="w-1/4 sm:w-1/2 justify-start items-center flex">
+              <a href="/" class="text-xl tracking-wide font-light text-white sm:leading-none p-2">
+                <svg class="h-auto w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+              </a> 
+              <p
+                class="text-xl tracking-wide leading-10 font-extrabold text-white sm:text-xl sm:leading-none p-2 hidden sm:block">
+                <%= template.name %>
+              </p>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <main> 
+        <div id="theme-wrapper" class="fixed bg-gray-400 left-0 desktop left-1/2 overflow-y-auto">
+          <% if (user && user.license) {
+          %>
+          <iframe id="theme-iframe" class="absolute left-0 top-0 w-full h-full overflow-x-hidden mx-auto" src="https://tailwindsites-dev.glitch.me/themes-8919/<%= template.htmlFile %>"</iframe>
+          </iframe>
+          <%
+          } else {
+          %>
+          <img id="theme-image" src="<%= template.desktopImage %>" class="absolute left-0 top-0 w-full h-auto overflow-x-hidden mx-auto" />
+          <%
+          }
+          %>
+        </div>
+        <div id="code-wrapper" class="hidden fixed bg-gray-400 left-0 desktop left-1/2 overflow-y-scroll">
+          <pre><code id="html-code-formatted" class="language-html"><%= templateHtml %></code></pre> 
+          <div id="copy" class="sticky bottom-0 px-6 py-4 bg-red-500 text-white text-center text-xl font-bold w-full cursor-pointer" style=""> 
+            Copy
+          </div>
+        </div>
+    </main> 
+
+  <script src="/prism.js"></script>
+  <script>
+    function copyStringToClipboard (str) {
+   // Create new element
+   var el = document.createElement('textarea');
+   // Set value (string to be copied)
+   el.value = str;
+   // Set non-editable to avoid focus and move outside of view
+   el.setAttribute('readonly', '');
+   el.style = {position: 'absolute', left: '-9999px'};
+   document.body.appendChild(el);
+   // Select text inside element
+   el.select();
+   // Copy text to clipboard
+   document.execCommand('copy');
+   // Remove temporary element
+   document.body.removeChild(el);
+} 
+
+    let previewBtn = document.querySelector("#preview");
+    let codeBtn = document.querySelector("#code");
+    let copyBtn = document.querySelector("#copy");
+
+    let codeWrapper = document.querySelector("#code-wrapper");
+    let iframeWrapper = document.querySelector("#theme-wrapper");
+    let iframe = document.querySelector("#theme-iframe");
+    let themeImage = document.querySelector("#theme-image");
+    let copyText = "";
+    
+    if (iframe) {
+      iframe.onload = function() {
+        copyText = document.getElementById('theme-iframe').contentWindow.document; 
+        console.dir(copyText)
+      };
+    }
+    
+    if (copyBtn) {
+      copyBtn.addEventListener("click", (e) => {
+        let copiedHtml = '<!DOCTYPE html>\n<html lang="en">\n';
+        copiedHtml += copyText.childNodes[1].innerHTML;
+        copiedHtml += "\n</html>";
+        
+        copyStringToClipboard(copiedHtml)
+        alert("Code copied to clipboard")
+      });
+    }
+
+    if (codeBtn) {
+      codeBtn.addEventListener("click", (e) => {
+        if (previewBtn) {
+          previewBtn.classList.add("bg-transparent");
+          previewBtn.classList.remove("bg-red-500");
+        }
+        codeBtn.classList.remove("bg-transparent");
+        codeBtn.classList.add("bg-red-500");
+        iframeWrapper.classList.add("hidden");
+        codeWrapper.classList.remove("hidden");
+      });
+    }
+
+    if (previewBtn) {
+      previewBtn.addEventListener("click", (e) => {
+        if (codeBtn) {
+          codeBtn.classList.add("bg-transparent");
+          codeBtn.classList.remove("bg-red-500");
+        }
+        previewBtn.classList.remove("bg-transparent");
+        previewBtn.classList.add("bg-red-500");
+        codeWrapper.classList.add("hidden");
+        iframeWrapper.classList.remove("hidden");
+      });
+    }
+
+    if (iframe) {
+      document.querySelector("#desktop").addEventListener("click", (e) => {
+        iconColor(e.currentTarget, "#tablet", "#mobile");
+        iframeWrapper.classList.add("desktop");
+        iframeWrapper.classList.remove("tablet");
+        iframeWrapper.classList.remove("mobile");
+        iframe.classList.add("hidden");
+        setTimeout(function(){ iframe.classList.remove("hidden"); }, 800);
+
+      });
+      document.querySelector("#tablet").addEventListener("click", (e) => {
+        iconColor(e.currentTarget, "#desktop", "#mobile");
+        iframeWrapper.classList.remove("desktop");
+        iframeWrapper.classList.add("tablet");
+        iframeWrapper.classList.remove("mobile");
+        iframe.classList.add("hidden");
+        setTimeout(function(){ iframe.classList.remove("hidden"); }, 800);
+      });
+      document.querySelector("#mobile").addEventListener("click", (e) => {
+        iconColor(e.currentTarget, "#tablet", "#desktop");
+        iframeWrapper.classList.remove("desktop");
+        iframeWrapper.classList.remove("tablet");
+        iframeWrapper.classList.add("mobile");
+        iframe.classList.add("hidden");
+        setTimeout(function(){ iframe.classList.remove("hidden"); }, 800);
+      });
+    }
+
+    if (themeImage) {
+      document.querySelector("#desktop").addEventListener("click", (e) => {
+        iconColor(e.currentTarget, "#tablet", "#mobile");
+        iframeWrapper.classList.add("desktop");
+        iframeWrapper.classList.remove("tablet");
+        iframeWrapper.classList.remove("mobile");
+        themeImage.classList.add("hidden");
+        themeImage.src = "<%= template.desktopImage %>";
+        setTimeout(function(){ themeImage.classList.remove("hidden"); }, 800);
+
+      });
+      document.querySelector("#tablet").addEventListener("click", (e) => {
+        iconColor(e.currentTarget, "#desktop", "#mobile");
+        iframeWrapper.classList.remove("desktop");
+        iframeWrapper.classList.add("tablet");
+        iframeWrapper.classList.remove("mobile");
+        themeImage.classList.add("hidden");
+        themeImage.src = "<%= template.tabletImage %>";
+        setTimeout(function(){ themeImage.classList.remove("hidden"); }, 800);
+      });
+      document.querySelector("#mobile").addEventListener("click", (e) => {
+        iconColor(e.currentTarget, "#tablet", "#desktop");
+        iframeWrapper.classList.remove("desktop");
+        iframeWrapper.classList.remove("tablet");
+        iframeWrapper.classList.add("mobile");
+        themeImage.classList.add("hidden");
+        themeImage.src = "<%= template.mobileImage %>";
+        setTimeout(function(){ themeImage.classList.remove("hidden"); }, 800);
+      });
+    }
+
+    let iconColor = (target, deviceOff1, deviceOff2) => {
+      target.classList.remove("text-gray-500");
+      target.classList.add("text-white");
+      document.querySelector(deviceOff1).classList.remove("text-white");
+      document.querySelector(deviceOff1).classList.add("text-gray-500");
+      document.querySelector(deviceOff2).classList.remove("text-white");
+      document.querySelector(deviceOff2).classList.add("text-gray-500");
+    }
+  </script>
+</body>
+
+</html>

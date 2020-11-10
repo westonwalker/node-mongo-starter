@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head'); %>
+  <style>
+  .select-div {
+    top: 50%;
+    left: 50%;
+    transform: translate(-4rem, -31px);
+  }         
+  .custom-shape-divider-bottom-1604114947 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      transform: rotate(180deg);
+  }
+
+  .custom-shape-divider-bottom-1604114947 svg {
+      position: relative;
+      display: block;
+      width: calc(119% + 1.3px);
+      height: 59px;
+  }
+
+  .custom-shape-divider-bottom-1604114947 .shape-fill {
+      fill: #2A4365;
+  }
+  </style>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+    <main>
+        <div class="lg:relative">
+            <div class="mx-auto max-w-6xl w-full pt-4 lg:pt-8 text-left px-10 sm:px-16">
+                <%- include('../partials/flash'); %> 
+                <div class="mx-auto flex flex-wrap">
+                    <div class="w-full flex items-center">
+                        <div>
+                            <h1
+                              class="text-2xl leading-snug font-extrabold text-blue-900 sm:text-2xl md:text-4xl lg:text-4xl xl:text-4xl">
+                              Premium Tailwind CSS Site Templates. Perfectly designed, professionally coded.
+                            </h1>
+                            <p class="my-3 text-lg text-gray-700 sm:text-xl md:my-5 leading-8">
+                              Fully responsive Tailwind site templates. Each template is expertly crafted, constantly maintained, and easily customizable.
+                              Pay <span class="font-bold text-red-500">once</span> and get <span class="font-bold text-red-500">unlimited</span> access to all current and future
+                              templates for just <span class="line-through">$99</span> <span style="transform: rotate(-4deg)" class="font-bold text-red-500 bg-blue-900 p-1 inline-block text-2xl">$49</span>.
+                            </p> 
+                        </div>
+                    </div>
+                    <div class="w-full flex items-center"> 
+                      <p class="text-md text-gray-600 leading-10">
+                          Follow me to know when I release new stuff!
+                          <iframe
+                              src="https://platform.twitter.com/widgets/follow_button.html?screen_name=WesWalker2112&show_screen_name=false&show_count=false&size=l"
+                              title="Follow WesWalker2112" width="auto" height="50"
+                              style="border: 0; overflow: hidden;"></iframe>
+                      </p> 
+                    </div>
+                </div>
+            </div>
+            <div class="relative text-center">  
+                <p class="text-blue-900 font-bold sm:text-3xl text-2xl rounded mx-auto">
+                 All Templates
+                </p>
+                <svg class="text-blue-900 mx-auto w-12 h-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg> 
+            </div>
+            <div class="relative mt-8">
+              <div class="custom-shape-divider-bottom-1604114947">
+                  <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                      <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+                  </svg>
+              </div>
+            </div>
+            <div id="templates" class="bg-blue-900 py-8 lg:py-16">
+              <div class="mx-auto max-w-7xl w-full px-10 sm:px-16 xl:px-48 grid gap-10 grid-cols-1 md:grid-cols-2">
+              <% templates.forEach(function(template) { %>
+                <a href="/themes/<%= template.slug %>" class="relative text-center">
+                  <img class="w-full h-auto rounded-md transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105" 
+                       src="<%= template.thumbnailImage %>" />
+                </a>
+              <% }); %>
+              </div> 
+            </div> 
+        </div>
+
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+</body>
+
+</html>

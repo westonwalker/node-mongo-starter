@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head', {title: 'Oops!'}); %>
+</head>
+<body>
+
+<header>
+    <%- include('partials/header'); %>
+</header>
+
+<main>
+  <div class="lg:relative">
+    <div class="mx-auto max-w-6xl w-full py-8 lg:py-16 text-left px-10 sm:px-16"> 
+      <h1
+          class="text-4xl leading-10 font-extrabold text-gray-700 sm:text-4xl sm:leading-none md:text-5xl lg:text-5xl xl:text-5xl">
+        <%= status %>
+      </h1>
+      <p class="my-3 text-xl text-gray-700 sm:text-2xl md:my-5 leading-10">
+        <%= message %>
+      </p> 
+    </div>
+  </div>
+</main>
+
+<footer>
+    <%- include('partials/footer'); %>
+</footer>
+
+</body>
+</html>
