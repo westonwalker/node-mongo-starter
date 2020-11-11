@@ -25,12 +25,34 @@ exports.updateAccountEmail = async (req, res) => {
     { $set: updates },
     { new: true, runValidators: true, context: 'query' }
   )
-
-  res.redirect('/account')
+  // relog the user in with new email 
+  await req.login(user) 
+  req.flash('success', 'Email updated!')
+  res.redirect('back')
 }
 
-// TODO
 exports.updateAccountPassword = async (req, res) => {
+  const user = await User.findOne({
+    _id: req.user._id
+  })
+  const currentPassword = req.body.current_password;
+  const newPassword = req.body.new_password; 
+  const changePassword = promisify(user.changePassword, user)
+
+  try {
+    await changePassword(currentPassword, newPassword)
+    const setPassword = promisify(user.setPassword, user)
+    await setPassword(newPassword)
+    const updatedUser = await user.save()
+    await req.login(updatedUser)
+    req.flash('success', 'Password Updated!')
+  } catch(err) { 
+    if(err.name === 'IncorrectPasswordError'){ 
+        req.flash('error', 'Incorrect password!')
+    }else { 
+        req.flash('error', 'Oops Something went wrong!!')
+    }
+  }
   res.redirect('/account')
 }
 

@@ -30,7 +30,9 @@
                 <input value="<%= user.email %>"
                        class="max-w-xs shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                        type="text"
-                       placeholder="email">
+                       name="email"
+                       placeholder="email"
+                       required>
               </div>
               <div class="flex items-center justify-between">
                 <button type="submit"
@@ -50,12 +52,16 @@
                 </label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                        type="password"
-                       placeholder="Current password">
+                       placeholder="Current password"
+                       name="current_password"
+                       required>
               </div>
               <div class="mb-4 max-w-xs">
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                        type="password"
-                       placeholder="New password">
+                       placeholder="New password"
+                       name="new_password"
+                       required>
               </div>
               <div class="flex items-center justify-between">
                 <button type="submit"

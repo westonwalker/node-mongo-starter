@@ -14,10 +14,7 @@ const userSchema = new Schema({
     trim: true,
     validate: [validator.isEmail, 'Please enter a valid email address!'],
     required: 'Please supply an email address',
-  },
-  license: {
-    type: String,
-  },
+  }
 })
 
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' })

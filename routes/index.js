@@ -21,7 +21,7 @@ router.post('/register',
 // auth
 router.post('/login',  authController.login)
 router.get('/logout', authController.logout)
-router.post('/account-email', catchErrors(userController.updateAccountEmail))
-router.post('/account-password', catchErrors(userController.updateAccountPassword))
+router.post('/account-email', catchErrors(userController.updateAccountEmail), authController.login)
+router.post('/account-password', userController.updateAccountPassword)
 
 module.exports = router;
